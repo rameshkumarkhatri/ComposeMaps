@@ -4,4 +4,6 @@
     <style name="Theme.RestaurantFinderCompose" parent="android:Theme.Material.Light.NoActionBar">
         <item name="android:statusBarColor">@color/purple_700</item>
     </style>
+
+    <color name="purple_700">#673AB7</color>
 </resources>
