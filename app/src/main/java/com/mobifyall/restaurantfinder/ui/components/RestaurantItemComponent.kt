@@ -146,13 +146,5 @@ fun RestaurantItemComponent(uiState: RestaurantUIState, onClick: () -> Unit) {
                     start.linkTo(image.end)
                 }, text = uiState.desc, style = Typography.body2, color = Color.Black
         )
-//            Text(
-//                modifier = Modifier
-//                    .fillMaxWidth(),
-//                text = uiState.,
-//                style = Typography.caption,
-//                color = Color.Black
-//            )
-
     }
 }
