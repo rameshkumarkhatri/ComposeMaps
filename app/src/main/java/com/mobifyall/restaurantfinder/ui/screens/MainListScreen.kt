@@ -4,8 +4,10 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.layout.R
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -15,9 +17,12 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.mobifyall.restaurantfinder.NO_RESULTS
+import com.mobifyall.restaurantfinder.R.*
+import com.mobifyall.restaurantfinder.TAG_PROGRESS
+import com.mobifyall.restaurantfinder.ui.components.RestaurantItemComponent
 import com.mobifyall.restaurantfinder.ui.states.MainUIState
+import com.mobifyall.restaurantfinder.ui.theme.Typography
 import com.mobifyall.restaurantfinder.viewmodels.RestaurantSearchViewModel
-import kotlin.text.Typography
 
 @Composable
 fun MainListScreen(viewModel: RestaurantSearchViewModel) {
@@ -28,7 +33,7 @@ fun MainListScreen(viewModel: RestaurantSearchViewModel) {
                 modifier = Modifier,
                 title = {
                     Text(
-                        text = stringResource(id = R.string.app_name),
+                        text = stringResource(id = string.app_name),
                     )
                 }
             )
@@ -41,10 +46,8 @@ fun MainListScreen(viewModel: RestaurantSearchViewModel) {
                 .fillMaxSize(1f)
                 .background(Color.White),
         ) {
-//            val uiState = viewModel.uiStateLandingLD.observeAsState()
-            val uiState = remember {
-                viewModel.mainUIState
-            }
+            val uiState =
+                viewModel.uiState.collectAsState()
             when (uiState.value) {
                 is MainUIState.Loading -> {
                     Column(
@@ -70,19 +73,19 @@ fun MainListScreen(viewModel: RestaurantSearchViewModel) {
                             .fillMaxSize(1f)
                             .align(Alignment.CenterHorizontally),
                         text = (uiState.value as MainUIState.NoResult).message,
-                        style = Typography.headlineMedium,
+                        style = Typography.h4,
                         color = Color.Black,
                         textAlign = TextAlign.Center
                     )
                 }
                 is MainUIState.Success -> {
-                                 LazyColumn(
+                    LazyColumn(
                         Modifier.fillMaxSize(),
                         contentPadding = PaddingValues(16.dp)
                     ) {
                         itemsIndexed((uiState.value as MainUIState.Success).list) { index, item ->
-                            RowCurrency(uiState = item) {
-                                callback(index)
+                            RestaurantItemComponent(uiState = item) {
+                                //todo add functionality
                             }
                             Divider(
                                 Modifier.padding(vertical = 10.dp),

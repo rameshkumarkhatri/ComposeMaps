@@ -26,7 +26,11 @@ android {
     }
 
     buildTypes {
+        debug {
+            buildConfigField "String", "API_URL", "\"https://maps.googleapis.com/maps/api/place/\";"
+        }
         release {
+            buildConfigField "String", "API_URL", "\"https://maps.googleapis.com/maps/api/place/\";"
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
