@@ -20,7 +20,9 @@ import androidx.navigation.navArgument
 import com.mobifyall.restaurantfinder.ui.screens.MainListScreen
 import com.mobifyall.restaurantfinder.ui.theme.RestaurantFinderComposeTheme
 import com.mobifyall.restaurantfinder.viewmodels.RestaurantSearchViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     private val viewModel: RestaurantSearchViewModel by viewModels()
 

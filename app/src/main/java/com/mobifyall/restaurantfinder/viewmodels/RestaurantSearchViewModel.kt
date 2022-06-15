@@ -1,17 +1,22 @@
 package com.mobifyall.restaurantfinder.viewmodels
 
 import androidx.lifecycle.ViewModel
+import com.mobifyall.restaurantfinder.core.repos.RestaurantSearchRepo
 import com.mobifyall.restaurantfinder.ui.states.MainUIState
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import retrofit2.HttpException
 import java.io.IOException
+import javax.inject.Inject
 
-class RestaurantSearchViewModel : ViewModel() {
+@HiltViewModel
+class RestaurantSearchViewModel @Inject constructor(private val repo: RestaurantSearchRepo) :
+    ViewModel() {
     //region private properties
-    private val _uiState = MutableStateFlow(MainUIState.Loading)
+    private val _uiState = MutableStateFlow<MainUIState>(MainUIState.Loading)
     //endregion
 
     //region public properties
@@ -23,8 +28,9 @@ class RestaurantSearchViewModel : ViewModel() {
         t.printStackTrace()
         when (t) {
             is IOException -> {
-//                uiStateLanding.value =
-//                    LandingUIState.NoResult("Please check your internet connection")
+                _uiState.tryEmit(
+                    MainUIState.NoResult("Please check your internet connection")
+                )
             }
             is HttpException -> {
 //                uiStateLanding.value = LandingUIState.NoResult(
@@ -36,5 +42,10 @@ class RestaurantSearchViewModel : ViewModel() {
 //                uiStateLanding.value = LandingUIState.NoResult("No result")
             }
         }
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        job?.cancel()
     }
 }

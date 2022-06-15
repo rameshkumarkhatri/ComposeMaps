@@ -1,4 +1,8 @@
 package com.mobifyall.restaurantfinder
 
-class RestaurantApplication {
+import android.app.Application
+import dagger.hilt.android.HiltAndroidApp
+
+@HiltAndroidApp
+class RestaurantApplication: Application() {
 }
