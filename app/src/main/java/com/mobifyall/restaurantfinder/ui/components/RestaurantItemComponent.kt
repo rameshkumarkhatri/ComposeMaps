@@ -36,33 +36,39 @@ fun RestaurantItemComponentPreview() {
                 isFav = false,
                 imageUrl = "https://i.picsum.photos/id/326/200/300.jpg?hmac=SKzjQ5ycCVyISiOfq2m-GqpQ5zWT_J202KPYG7z0uB4",
                 4.5f,
-                109
+                "109", 0.0, 0.0
             )
         ) {}
-        RestaurantItemComponent (uiState = RestaurantUIState(
-            title = "Restaurant Title - 2",
-            desc = "$10 - $20 Description",
-            isFav = false,
-            imageUrl = "https://i.picsum.photos/id/326/200/300.jpg?hmac=SKzjQ5ycCVyISiOfq2m-GqpQ5zWT_J202KPYG7z0uB4",
-            4.5f,
-            109
-        )) {}
-        RestaurantItemComponent (uiState = RestaurantUIState(
-            title = "Restaurant Title - 3",
-            desc = "$10 - $20 Description",
-            isFav = false,
-            imageUrl = "https://i.picsum.photos/id/326/200/300.jpg?hmac=SKzjQ5ycCVyISiOfq2m-GqpQ5zWT_J202KPYG7z0uB4",
-            4.5f,
-            109
-        )) {}
-        RestaurantItemComponent (uiState = RestaurantUIState(
-            title = "Restaurant Title - 4",
-            desc = "$10 - $20 Description",
-            isFav = false,
-            imageUrl = "https://i.picsum.photos/id/326/200/300.jpg?hmac=SKzjQ5ycCVyISiOfq2m-GqpQ5zWT_J202KPYG7z0uB4",
-            4.5f,
-            109
-        )) {}
+        RestaurantItemComponent(
+            uiState = RestaurantUIState(
+                title = "Restaurant Title - 2",
+                desc = "$10 - $20 Description",
+                isFav = false,
+                imageUrl = "https://i.picsum.photos/id/326/200/300.jpg?hmac=SKzjQ5ycCVyISiOfq2m-GqpQ5zWT_J202KPYG7z0uB4",
+                4.5f,
+                "109",0.0, 0.0
+            )
+        ) {}
+        RestaurantItemComponent(
+            uiState = RestaurantUIState(
+                title = "Restaurant Title - 3",
+                desc = "$10 - $20 Description",
+                isFav = false,
+                imageUrl = "https://i.picsum.photos/id/326/200/300.jpg?hmac=SKzjQ5ycCVyISiOfq2m-GqpQ5zWT_J202KPYG7z0uB4",
+                4.5f,
+                "109", 0.0, 0.0
+            )
+        ) {}
+        RestaurantItemComponent(
+            uiState = RestaurantUIState(
+                title = "Restaurant Title - 4",
+                desc = "$10 - $20 Description",
+                isFav = false,
+                imageUrl = "https://i.picsum.photos/id/326/200/300.jpg?hmac=SKzjQ5ycCVyISiOfq2m-GqpQ5zWT_J202KPYG7z0uB4",
+                4.5f,
+                "109", 0.0, 0.0
+            )
+        ) {}
     }
 }
 
@@ -96,7 +102,8 @@ fun RestaurantItemComponent(uiState: RestaurantUIState, onClick: () -> Unit) {
                 Image(
                     painter = painter,
                     contentDescription = "Image",
-                    modifier = Modifier.padding(16.dp)
+                    modifier = Modifier
+                        .padding(16.dp)
                         .width(64.dp)
                         .height(64.dp),
                     contentScale = ContentScale.FillBounds,
@@ -106,11 +113,12 @@ fun RestaurantItemComponent(uiState: RestaurantUIState, onClick: () -> Unit) {
 
         Text(
             modifier = Modifier
+                .fillMaxSize(0.8f)
                 .padding(8.dp)
                 .constrainAs(title) {
                     top.linkTo(parent.top)
                     start.linkTo(image.end)
-                }, text = uiState.title, style = Typography.h5, color = Color.Black
+                }, text = uiState.title, style = Typography.body1, color = Color.Black
         )
         val isFav = remember { mutableStateOf(uiState.isFav) }
 
@@ -139,6 +147,7 @@ fun RestaurantItemComponent(uiState: RestaurantUIState, onClick: () -> Unit) {
         // we can change color based on the price drop/up
         Text(
             modifier = Modifier
+                .fillMaxWidth(0.8f)
                 .padding(8.dp)
                 .constrainAs(desc) {
                     top.linkTo(rating.bottom)

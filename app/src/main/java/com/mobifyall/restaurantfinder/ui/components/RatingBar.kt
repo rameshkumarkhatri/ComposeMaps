@@ -26,7 +26,7 @@ import com.mobifyall.restaurantfinder.ui.theme.Typography
 fun RatingBar(
     rating: Float,
     modifier: Modifier,
-    count: Int
+    count: String
 ) {
     RatingBarLayout(
         starSize = 20f,
@@ -34,7 +34,7 @@ fun RatingBar(
         modifier = modifier,
         ratingCountScope = {
             Text(
-                text = count.toString(),
+                text = count,
                 modifier = Modifier.padding(start = 6.dp),
                 color = Black,
                 style = Typography.caption
