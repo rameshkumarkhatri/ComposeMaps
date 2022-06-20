@@ -1,6 +1,7 @@
 package com.mobifyall.restaurantfinder.core.service
 
 import com.mobifyall.restaurantfinder.core.models.Response
+import com.mobifyall.restaurantfinder.core.models.RestaurantDetails
 import retrofit2.http.GET
 import retrofit2.http.Query
 
@@ -15,6 +16,12 @@ interface RestaurantService {
         @Query("type") type: String = TypeRestaurant,
         @Query("radius") radius: String = DefaultRadius,
     ): Response
+
+    //we can add the parameters what we need
+    @GET("details/json")
+    suspend fun getRestaurantDetails(
+        @Query("place_id") placeId: String, apiKey: String
+    ): RestaurantDetails
 }
 
 const val TypeRestaurant = "restaurant"

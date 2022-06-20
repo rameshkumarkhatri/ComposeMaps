@@ -2,6 +2,8 @@ package com.mobifyall.restaurantfinder.viewmodels
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.LocationOn
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.android.gms.maps.model.LatLng
@@ -11,6 +13,7 @@ import com.mobifyall.restaurantfinder.core.repos.RestaurantSearchRepo
 import com.mobifyall.restaurantfinder.lists.FavoriteManger
 import com.mobifyall.restaurantfinder.mapper.RestaurantUIMapper
 import com.mobifyall.restaurantfinder.ui.states.MainUIState
+import com.mobifyall.restaurantfinder.ui.states.RestaurantUIState
 import com.mobifyall.restaurantfinder.ui.states.ViewType
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler
