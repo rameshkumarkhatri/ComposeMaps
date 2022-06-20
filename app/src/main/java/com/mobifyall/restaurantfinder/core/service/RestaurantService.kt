@@ -10,7 +10,7 @@ interface RestaurantService {
 
     @GET("nearbysearch/json")
     suspend fun getNearByRestaurants(
-        @Query("location") location: String, //by comma seperate lat,lng
+        @Query("location") location: String, //by comma separate lat,lng
         @Query("key") apiKey: String,
         @Query("type") type: String = TypeRestaurant,
         @Query("radius") radius: String = DefaultRadius,
@@ -18,4 +18,4 @@ interface RestaurantService {
 }
 
 const val TypeRestaurant = "restaurant"
-const val DefaultRadius = "1500"
+const val DefaultRadius = "3500" //this is meter

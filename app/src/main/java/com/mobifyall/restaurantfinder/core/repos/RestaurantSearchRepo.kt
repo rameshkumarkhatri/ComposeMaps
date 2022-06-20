@@ -16,7 +16,6 @@ class RestaurantSearchRepoImp(private val service: RestaurantService) : Restaura
 
     override suspend fun getNearByRestaurants(lat: Double, lng: Double): Response {
         return service.getNearByRestaurants("$lat,$lng", BuildConfig.googleApiKey)
-
     }
 
 
