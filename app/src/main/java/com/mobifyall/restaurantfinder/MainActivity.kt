@@ -51,10 +51,6 @@ class MainActivity : ComponentActivity() {
                             MainListScreen(
                                 viewModel = viewModel,
                             )
-//                            {
-                            // we can also use the single event live data to navigate too
-//                                navController.navigate(createUriDescription(it))
-//                            }
                         }
                         composable(
                             navDescriptionDestination,
@@ -83,6 +79,7 @@ class MainActivity : ComponentActivity() {
             }
             else -> {
                 // No location access granted.
+                //todo show the location UI why we need this
             }
         }
     }
