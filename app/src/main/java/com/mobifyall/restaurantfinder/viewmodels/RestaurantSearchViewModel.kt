@@ -8,6 +8,7 @@ import com.google.android.gms.maps.model.LatLng
 import com.mobifyall.restaurantfinder.core.models.Location
 import com.mobifyall.restaurantfinder.core.models.Response
 import com.mobifyall.restaurantfinder.core.repos.RestaurantSearchRepo
+import com.mobifyall.restaurantfinder.lists.FavoriteManger
 import com.mobifyall.restaurantfinder.mapper.RestaurantUIMapper
 import com.mobifyall.restaurantfinder.ui.states.MainUIState
 import com.mobifyall.restaurantfinder.ui.states.ViewType
@@ -25,13 +26,15 @@ import javax.inject.Inject
 @HiltViewModel
 class RestaurantSearchViewModel @Inject constructor(
     private val repo: RestaurantSearchRepo,
-    private val mapper: RestaurantUIMapper
+    private val mapper: RestaurantUIMapper,
+    private val favoriteManger: FavoriteManger
 ) :
     ViewModel() {
     //region private properties
     private val _uiState = MutableStateFlow<MainUIState>(MainUIState.Loading)
     private val _locationState = MutableStateFlow<LatLng>(LatLng(0.0, 0.0))
     private var restaurantsResponse: Response? = null
+    private var currentViewType: ViewType = ViewType.ListView
     //endregion
 
     //region public properties
@@ -94,14 +97,22 @@ class RestaurantSearchViewModel @Inject constructor(
     fun toggle(viewType: ViewType) {
         job = viewModelScope.launch(Dispatchers.Default + coroutineExceptionHandler) {
             restaurantsResponse?.let {
-                restaurantsResponse = it
-                if (viewType == ViewType.ListView) {
-                    val uiState = mapper.getRestaurantsUIState(it, ViewType.MapView)
-                    _uiState.emit(uiState)
-                } else {
-                    val uiState = mapper.getRestaurantsUIState(it, ViewType.ListView)
-                    _uiState.emit(uiState)
-                }
+                currentViewType =
+                    if (viewType == ViewType.ListView) ViewType.MapView else ViewType.ListView
+
+                val uiState = mapper.getRestaurantsUIState(it, currentViewType)
+                _uiState.emit(uiState)
+            }
+        }
+    }
+
+    fun favClicked(id: String) {
+        job = viewModelScope.launch(Dispatchers.Default + coroutineExceptionHandler) {
+            restaurantsResponse?.let {
+                favoriteManger.addRemoveFav(id)
+                //we can do better to optimize this
+                val uiState = mapper.getRestaurantsUIState(it, currentViewType)
+                _uiState.emit(uiState)
             }
         }
     }

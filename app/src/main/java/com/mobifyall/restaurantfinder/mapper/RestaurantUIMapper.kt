@@ -40,10 +40,11 @@ class RestaurantUIMapper @Inject constructor(private val manager: FavoriteManger
                 desc = it.getAddress().toString(),
                 rating = it.rating?.toFloat().orZero(),
                 ratingCount = it.ratingCount.withBracketsOrEmpty(),
-                isFav = manager.isFavorite(),
+                isFav = manager.isFavorite(it.placeID.orEmpty()),
                 imageUrl = it.icon.orDefaultImage(),
                 lat = it.geometry?.location?.latitude,
                 lng = it.geometry?.location?.longitude,
+                id = it.placeID.orEmpty()
             )
         }
     }

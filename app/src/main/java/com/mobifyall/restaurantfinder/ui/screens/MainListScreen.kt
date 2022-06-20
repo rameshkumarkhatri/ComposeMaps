@@ -92,9 +92,10 @@ fun MainListScreen(viewModel: RestaurantSearchViewModel) {
                                 Modifier.fillMaxSize(1f),
                                 contentPadding = PaddingValues(16.dp)
                             ) {
-                                itemsIndexed(data.list) { index, item ->
-                                    RestaurantItemComponent(uiState = item) {
-                                        //todo add functionality
+                                itemsIndexed(data.list) { _, item ->
+                                    RestaurantItemComponent(uiState = item, {
+                                        viewModel.favClicked(item.id)
+                                    }) {
                                     }
                                     Divider(
                                         Modifier.padding(vertical = 10.dp),

@@ -18,4 +18,4 @@ interface RestaurantService {
 }
 
 const val TypeRestaurant = "restaurant"
-const val DefaultRadius = "3500" //this is meter
+const val DefaultRadius = "3500" //this is meters

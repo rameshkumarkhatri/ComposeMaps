@@ -7,11 +7,15 @@ import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.outlined.Favorite
 import androidx.compose.material.icons.rounded.Favorite
+import androidx.compose.material.icons.rounded.FavoriteBorder
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Color.Companion.Red
+import androidx.compose.ui.graphics.Color.Companion.Yellow
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.tooling.preview.Preview
@@ -24,62 +28,67 @@ import coil.compose.rememberImagePainter
 import coil.size.Scale
 import com.mobifyall.restaurantfinder.TAG_ITEM
 import com.mobifyall.restaurantfinder.ui.states.RestaurantUIState
+import com.mobifyall.restaurantfinder.ui.theme.Purple
 import com.mobifyall.restaurantfinder.ui.theme.Typography
+import okhttp3.internal.notify
 
 @Composable
-@Preview
+@Preview(widthDp = 400)
 fun RestaurantItemComponentPreview() {
     Column {
-        RestaurantItemComponent(
-            uiState = RestaurantUIState(
-                title = "Restaurant Title - 1",
-                desc = "$10 - $20 Description",
-                isFav = false,
-                imageUrl = "https://i.picsum.photos/id/326/200/300.jpg?hmac=SKzjQ5ycCVyISiOfq2m-GqpQ5zWT_J202KPYG7z0uB4",
-                4.5f,
-                "109", 0.0, 0.0
-            )
-        ) {}
-        RestaurantItemComponent(
-            uiState = RestaurantUIState(
-                title = "Restaurant Title - 2",
-                desc = "$10 - $20 Description",
-                isFav = false,
-                imageUrl = "https://i.picsum.photos/id/326/200/300.jpg?hmac=SKzjQ5ycCVyISiOfq2m-GqpQ5zWT_J202KPYG7z0uB4",
-                4.5f,
-                "109",0.0, 0.0
-            )
-        ) {}
-        RestaurantItemComponent(
-            uiState = RestaurantUIState(
-                title = "Restaurant Title - 3",
-                desc = "$10 - $20 Description",
-                isFav = false,
-                imageUrl = "https://i.picsum.photos/id/326/200/300.jpg?hmac=SKzjQ5ycCVyISiOfq2m-GqpQ5zWT_J202KPYG7z0uB4",
-                4.5f,
-                "109", 0.0, 0.0
-            )
-        ) {}
-        RestaurantItemComponent(
-            uiState = RestaurantUIState(
-                title = "Restaurant Title - 4",
-                desc = "$10 - $20 Description",
-                isFav = false,
-                imageUrl = "https://i.picsum.photos/id/326/200/300.jpg?hmac=SKzjQ5ycCVyISiOfq2m-GqpQ5zWT_J202KPYG7z0uB4",
-                4.5f,
-                "109", 0.0, 0.0
-            )
-        ) {}
+        RestaurantItemComponent(uiState = RestaurantUIState(
+            title = "Restaurant Title - 1",
+            desc = "$10 - $20 Description",
+            isFav = false,
+            imageUrl = "https://i.picsum.photos/id/326/200/300.jpg?hmac=SKzjQ5ycCVyISiOfq2m-GqpQ5zWT_J202KPYG7z0uB4",
+            4.5f,
+            "109",
+            0.0,
+            0.0, id = "9"
+        ), {}) {}
+        RestaurantItemComponent(uiState = RestaurantUIState(
+            title = "Restaurant Title - 2",
+            desc = "$10 - $20 Description",
+            isFav = true,
+            imageUrl = "https://i.picsum.photos/id/326/200/300.jpg?hmac=SKzjQ5ycCVyISiOfq2m-GqpQ5zWT_J202KPYG7z0uB4",
+            4.5f,
+            "109",
+            0.0,
+            0.0, id = "9"
+        ), {}) {}
+        RestaurantItemComponent(uiState = RestaurantUIState(
+            title = "Restaurant Title - 3",
+            desc = "$10 - $20 Description",
+            isFav = false,
+            imageUrl = "https://i.picsum.photos/id/326/200/300.jpg?hmac=SKzjQ5ycCVyISiOfq2m-GqpQ5zWT_J202KPYG7z0uB4",
+            4.5f,
+            "109",
+            0.0,
+            0.0, id = "9"
+        ), {}) {}
+        RestaurantItemComponent(uiState = RestaurantUIState(
+            title = "Restaurant Title - 4",
+            desc = "$10 - $20 Description",
+            isFav = false,
+            imageUrl = "https://i.picsum.photos/id/326/200/300.jpg?hmac=SKzjQ5ycCVyISiOfq2m-GqpQ5zWT_J202KPYG7z0uB4",
+            4.5f,
+            "109",
+            0.0,
+            0.0, id = "9"
+        ), {}) {}
     }
 }
 
 @OptIn(ExperimentalCoilApi::class)
 @Composable
-fun RestaurantItemComponent(uiState: RestaurantUIState, onClick: () -> Unit) {
-    ConstraintLayout(modifier = Modifier
-        .fillMaxWidth()
-        .testTag(TAG_ITEM)
-        .clickable { onClick.invoke() }) {
+fun RestaurantItemComponent(
+    uiState: RestaurantUIState, favClicked: () -> Unit, onClick: () -> Unit
+) {
+    ConstraintLayout(
+        modifier = Modifier
+            .fillMaxWidth()
+            .testTag(TAG_ITEM)
+            .clickable { onClick.invoke() }) {
         val (image, title, rating, fav, desc) = createRefs()
 
         Column(
@@ -113,7 +122,8 @@ fun RestaurantItemComponent(uiState: RestaurantUIState, onClick: () -> Unit) {
         }
 
         Text(
-            modifier = Modifier.wrapContentHeight()
+            modifier = Modifier
+                .wrapContentHeight()
                 .padding(8.dp)
                 .constrainAs(title) {
                     top.linkTo(parent.top)
@@ -124,21 +134,7 @@ fun RestaurantItemComponent(uiState: RestaurantUIState, onClick: () -> Unit) {
         )
         val isFav = remember { mutableStateOf(uiState.isFav) }
 
-        IconButton(onClick = {
-            isFav.value = true
-        }, modifier = Modifier
-            .padding(start = 16.dp)
-            .size(28.dp)
-            .constrainAs(fav) {
-                top.linkTo(parent.top)
-                end.linkTo(parent.end)
 
-            }) {
-            Icon(
-                imageVector = if (isFav.value) Icons.Rounded.Favorite else Icons.Outlined.Favorite,
-                contentDescription = "Favorite button"
-            )
-        }
         RatingBar(
             rating = uiState.rating, modifier = Modifier
                 .padding(8.dp)
@@ -160,5 +156,23 @@ fun RestaurantItemComponent(uiState: RestaurantUIState, onClick: () -> Unit) {
                     width = Dimension.fillToConstraints
                 }, text = uiState.desc, style = Typography.body2, color = Color.Black
         )
+
+        IconButton(onClick = {
+            isFav.value = !isFav.value
+            favClicked()
+        }, modifier = Modifier
+            .size(50.dp)
+            .constrainAs(fav) {
+                top.linkTo(parent.top)
+                end.linkTo(parent.end)
+
+            }) {
+            Icon(
+                modifier = Modifier.padding(12.dp),
+                tint = Red,
+                imageVector = if (isFav.value) Icons.Rounded.Favorite else Icons.Rounded.FavoriteBorder,
+                contentDescription = "Favorite button"
+            )
+        }
     }
 }

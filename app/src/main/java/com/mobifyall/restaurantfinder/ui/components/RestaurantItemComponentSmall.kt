@@ -32,9 +32,11 @@ fun RestaurantItemComponentSmallSmallPreview() {
                 isFav = false,
                 imageUrl = "https://i.picsum.photos/id/326/200/300.jpg?hmac=SKzjQ5ycCVyISiOfq2m-GqpQ5zWT_J202KPYG7z0uB4",
                 4.5f,
-                "109", 0.0, 0.0
-            ),
-            modifier = Modifier.width(300.dp)
+                "109",
+                0.0,
+                0.0,
+                id = "9"
+            ), modifier = Modifier.width(300.dp)
         ) {}
         RestaurantItemComponentSmall(
             uiState = RestaurantUIState(
@@ -43,9 +45,11 @@ fun RestaurantItemComponentSmallSmallPreview() {
                 isFav = false,
                 imageUrl = "https://i.picsum.photos/id/326/200/300.jpg?hmac=SKzjQ5ycCVyISiOfq2m-GqpQ5zWT_J202KPYG7z0uB4",
                 4.5f,
-                "109", 0.0, 0.0
-            ),
-            modifier = Modifier.width(300.dp)
+                "109",
+                0.0,
+                0.0,
+                id = "9"
+            ), modifier = Modifier.width(300.dp)
         ) {}
         RestaurantItemComponentSmall(
             uiState = RestaurantUIState(
@@ -54,9 +58,11 @@ fun RestaurantItemComponentSmallSmallPreview() {
                 isFav = false,
                 imageUrl = "https://i.picsum.photos/id/326/200/300.jpg?hmac=SKzjQ5ycCVyISiOfq2m-GqpQ5zWT_J202KPYG7z0uB4",
                 4.5f,
-                "109", 0.0, 0.0
-            ),
-            modifier = Modifier.width(300.dp)
+                "109",
+                0.0,
+                0.0,
+                id = "9"
+            ), modifier = Modifier.width(300.dp)
         ) {}
         RestaurantItemComponentSmall(
             uiState = RestaurantUIState(
@@ -65,9 +71,11 @@ fun RestaurantItemComponentSmallSmallPreview() {
                 isFav = false,
                 imageUrl = "https://i.picsum.photos/id/326/200/300.jpg?hmac=SKzjQ5ycCVyISiOfq2m-GqpQ5zWT_J202KPYG7z0uB4",
                 4.5f,
-                "109", 0.0, 0.0
-            ),
-            modifier = Modifier.width(300.dp)
+                "109",
+                0.0,
+                0.0,
+                id = "9"
+            ), modifier = Modifier.width(300.dp)
         ) {}
     }
 }
@@ -75,9 +83,7 @@ fun RestaurantItemComponentSmallSmallPreview() {
 @OptIn(ExperimentalCoilApi::class)
 @Composable
 fun RestaurantItemComponentSmall(
-    uiState: RestaurantUIState,
-    modifier: Modifier = Modifier,
-    onClick: () -> Unit
+    uiState: RestaurantUIState, modifier: Modifier = Modifier, onClick: () -> Unit
 ) {
     ConstraintLayout(modifier = modifier
         .testTag(TAG_ITEM)

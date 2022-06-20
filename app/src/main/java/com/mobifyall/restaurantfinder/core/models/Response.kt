@@ -24,6 +24,7 @@ data class Candidate(
     @SerializedName("user_ratings_total") val ratingCount: Int? = null,
     @SerializedName("opening_hours") val openingHours: OpeningHours? = null,
     @SerializedName("icon") val icon: String? = null, //need to change to photo
+    @SerializedName("place_id") val placeID: String? = null, //need to change to photo
 ) : Parcelable {
     fun getAddress() = formattedAddress ?: vicinity
 }

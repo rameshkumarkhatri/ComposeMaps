@@ -11,5 +11,6 @@ data class RestaurantUIState(
     val ratingCount: String,
     val lat: Double?,
     val lng: Double?,
-    val otherDesc: String = emptyString()
+    val otherDesc: String = emptyString(),
+    val id: String
 )
