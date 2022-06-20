@@ -1,6 +1,5 @@
 package com.mobifyall.restaurantfinder.ui.states
 
-import android.graphics.drawable.Icon
 import androidx.compose.ui.graphics.vector.ImageVector
 
 sealed class MainUIState {
@@ -14,3 +13,4 @@ sealed class ViewType(val text: String) {
     object ListView: ViewType(text = "View As Map")
     object MapView: ViewType(text = "View As List")
 }
+

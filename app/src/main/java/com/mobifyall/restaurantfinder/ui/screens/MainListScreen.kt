@@ -9,6 +9,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -29,10 +30,22 @@ import com.mobifyall.restaurantfinder.ui.theme.Purple500
 import com.mobifyall.restaurantfinder.ui.theme.Typography
 import com.mobifyall.restaurantfinder.viewmodels.RestaurantSearchViewModel
 
+@OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun MainListScreen(viewModel: RestaurantSearchViewModel) {
-    Scaffold(
-        Modifier,
+
+    val bottomSheetScaffoldState = rememberBottomSheetScaffoldState(
+        bottomSheetState = BottomSheetState(BottomSheetValue.Collapsed)
+    )
+    val coroutineScope = rememberCoroutineScope()
+    BottomSheetScaffold(
+        scaffoldState = bottomSheetScaffoldState,
+        sheetContent =  {
+//            RestaurantDetailScreen(
+//                viewModel.detailsUIState
+//            )
+        },
+        modifier = Modifier,
         topBar = {
             TopAppBar(
                 modifier = Modifier,
