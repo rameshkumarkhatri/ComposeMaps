@@ -17,11 +17,12 @@ This project will demo the compose maps with google apis to get the data and sho
 # Tasks 
 Descriptions              |         Status
 :-----------------------: | :----------------------:
-** Read the compose maps documentation. ** | ** DONE **
-** Create list item component regular and small component in maps UI. ** | ** (DONE) **
-** Create Main Screen with with different UI LOADING, NO RESULTS, ERROR, SUCCESS RESULT ** | ** (DONE) **
-** Add Maps UI to show the markers  ** | ** (DONE) **
-** Add button to toggle view ** | ** (DONE) **
-** Details Bottomsheet ** | ** (DONE) **
-** Add Google integration to create route ** | ** (TODO) **
-** Search restaurant ** | ** (TODO) **
+Read the compose maps documentation.  |  DONE 
+Add permission for location and create helper classes | (Work In Progress)
+Create list item component regular and small component in maps UI.  | (DONE) 
+Create Main Screen with with different UI LOADING, NO RESULTS, ERROR, SUCCESS RESULT | (DONE)
+Add Maps UI to show the markers  | (DONE) 
+Add button to toggle view | (DONE) 
+Details Bottomsheet | (DONE) 
+Add Google integration to create route | (TODO) 
+Search restaurant | (TODO)
